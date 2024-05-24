@@ -1,0 +1,4 @@
+rootProject.name = 'kafka-labs'
+include 'simple-producer'
+include 'spring-boot-producer'
+

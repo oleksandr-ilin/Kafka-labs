@@ -1,0 +1,41 @@
+plugins {
+	id 'java'
+}
+
+repositories {
+	mavenCentral()
+}
+
+allprojects {
+	group = 'com.epam.kafkalabs'
+	version project.getProperty("version") == 'unspecified' ? "${baseVersion}-SNAPSHOT" : project.getProperty("version")
+}
+
+subprojects {
+	apply plugin: 'application'
+	apply plugin: 'java'
+	apply plugin: 'idea'
+
+	java {
+		sourceCompatibility = '17'
+	}
+
+	configurations {
+		compileOnly {
+			extendsFrom annotationProcessor
+		}
+	}
+
+	tasks.withType(JavaCompile) {
+		options.encoding = 'UTF-8'
+	}
+
+	repositories {
+		mavenCentral()
+	}
+
+	tasks.named('test') {
+		useJUnitPlatform()
+	}
+
+}
